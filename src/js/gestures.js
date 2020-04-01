@@ -11,80 +11,54 @@
 //  used to endorse or promote products derived from this software without specific 
 //  prior written permission.
 
-define(['readium_shared_js/globals', 'jquery','jquery_hammer','hammerjs'], function(Globals, $,jqueryHammer,Hammer) {
+define(['readium_shared_js/globals', 'jquery', 'jquery_hammer', 'hammerjs'], function (Globals, $, jqueryHammer, Hammer) {
 
-    var gesturesHandler = function(reader, viewport){
-        
-this.initialize= function(){};
-return; // TODO upgrade to Hammer API v2
+    var gesturesHandler = function (reader, viewport) {
 
-        var onSwipeLeft = function(){
+        var onSwipeLeft = function () {
             reader.openPageRight();
         };
 
-        var onSwipeRight = function(){
+        var onSwipeRight = function () {
             reader.openPageLeft();
         };
 
-        var isGestureHandled = function() {
-            var viewType = reader.getCurrentViewType();
 
-            return viewType === ReadiumSDK.Views.ReaderView.VIEW_TYPE_FIXED || viewType == ReadiumSDK.Views.ReaderView.VIEW_TYPE_COLUMNIZED;
-        };
+        this.initialize = function () {
 
-        this.initialize= function(){
 
-            reader.on(ReadiumSDK.Events.CONTENT_DOCUMENT_LOADED, function(iframe, spineItem) {
-                Globals.logEvent("CONTENT_DOCUMENT_LOADED", "ON", "gestures.js [ " + spineItem.href + " ]");
-                
-                //set hammer's document root
-                Hammer.DOCUMENT = iframe.contents();
-                //hammer's internal touch events need to be redefined? (doesn't work without)
-                Hammer.event.onTouch(Hammer.DOCUMENT, Hammer.EVENT_MOVE, Hammer.detection.detect);
-                Hammer.event.onTouch(Hammer.DOCUMENT, Hammer.EVENT_END, Hammer.detection.detect);
+            reader.on(ReadiumSDK.Events.CONTENT_DOCUMENT_LOADED, function (iframe, spineItem) {
+                console.log("hit/ here is your frame");
+                var hammertime = new Hammer(iframe[0].contentWindow.document);
+                console.log("hammertime");
 
-                //set up the hammer gesture events
-                //swiping handlers
-                var swipingOptions = {prevent_mouseevents: true};
-                Hammer(Hammer.DOCUMENT,swipingOptions).on("swipeleft", function() {
+                hammertime.on('swipeleft', function (ev) {
+                    console.log(ev);
                     onSwipeLeft();
                 });
-                Hammer(Hammer.DOCUMENT,swipingOptions).on("swiperight", function() {
+                hammertime.on('swiperight', function (ev) {
+                    console.log(ev);
                     onSwipeRight();
                 });
-
-                //remove stupid ipad safari elastic scrolling
-                //TODO: test this with reader ScrollView and FixedView
-                $(Hammer.DOCUMENT).on(
-                    'touchmove',
-                    function(e) {
-                        //hack: check if we are not dealing with a scrollview
-                        if(isGestureHandled()){
-                            e.preventDefault();
-                        }
-                    }
-                );
             });
 
-            //remove stupid ipad safari elastic scrolling (improves UX for gestures)
-            //TODO: test this with reader ScrollView and FixedView
             $(viewport).on(
                 'touchmove',
-                function(e) {
-                    if(isGestureHandled()) {
+                function (e) {
+                    if (isGestureHandled()) {
                         e.preventDefault();
                     }
                 }
             );
 
             //handlers on viewport
-            $(viewport).hammer().on("swipeleft", function() {
+            $(viewport).hammer().on("swipeleft", function () {
                 onSwipeLeft();
             });
-            $(viewport).hammer().on("swiperight", function() {
+            $(viewport).hammer().on("swiperight", function () {
                 onSwipeRight();
             });
-        };
+        }; // TODO upgrade to Hammer API v2
 
     };
     return gesturesHandler;
