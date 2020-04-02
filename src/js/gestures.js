@@ -40,6 +40,15 @@ define(['readium_shared_js/globals', 'jquery', 'jquery_hammer', 'hammerjs'], fun
                     console.log(ev);
                     onSwipeRight();
                 });
+                hammertime.on('tap', function (ev) {
+                    console.log(ev);
+                    if($(document.body).hasClass('hide-ui')){
+                        $(document.body).removeClass('hide-ui');
+                    } else {
+                        $(document.body).addClass('hide-ui');
+                    }
+
+                });
             });
 
             $(viewport).on(

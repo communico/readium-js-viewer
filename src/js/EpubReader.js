@@ -528,10 +528,10 @@ BookmarkData){
     
                 readium.reader.openContentUrl(href, tocUrl, undefined);
     
-                if (embedded) {
+                // if (embedded) {
                     $('.toc-visible').removeClass('toc-visible');
                     unhideUI();
-                }
+                // }
             } catch (err) {
                 
                 console.error(err);
@@ -718,7 +718,7 @@ BookmarkData){
             hideUI();
         }
         else{
-            hideTimeoutId = window.setTimeout(hideUI, 8000);
+            hideTimeoutId = window.setTimeout(hideUI, 4000);
         }
     }
 

@@ -69,11 +69,11 @@ direction: rtl;
 
 .toc-visible #readium-toc-body{
   display: inline-block;
-  width: 30%;
+  width: 100%;
 }
 
 .toc-visible #reading-area{
-  left: 30%;
+  left: 100%;
 }
 
 .navbar
@@ -88,24 +88,24 @@ direction: rtl;
   user-select:none;
   -webkit-user-select: none;
 }
-
 .navbar .btn-group > .btn:hover, .navbar .btn-group > .btn:active, .navbar .btn-group > .btn:focus{
   box-shadow: none;
 }
 
 .navbar .btn {
-  color : #ddd;
+  color : #838383;
   font-size: 16px;
   width: 48px;
   height: 36px;
   background: no-repeat center center;
-    background-color: #4d4d4d;
+  background-color: #f7f7f7;
 }
+
 
 .navbar
 {
-  background: #4d4d4d;
-  box-shadow: 0px 1px 5px #333;
+  background: #f7f7f7;
+  box-shadow: 0px 1px 3px #c3c3c3;
   border-radius: 0px;
   min-height: 36px;
   margin-bottom: 0px;
@@ -116,7 +116,7 @@ direction: rtl;
     overflow: visible;
     height: 0.4em;
     margin-right: 0 !important;
-    
+    float: right;
     min-height: 36px;
     background-color: #4d4d4d;
 }
@@ -208,7 +208,7 @@ html[data-theme=night-theme] .modal
   font-size: 40px;
 
   background-color: rgba(255,255,255,0.5);
-    color: black;
+    color: #c3c3c3;
 }
 
 html[data-theme=night-theme] .page-switch-overlay-icon {
@@ -235,8 +235,8 @@ vertical-align: middle;
 #left-page-btn:hover
 {
   opacity: 1.0;
-  color: white;
-  background-color: rgba(0,0,0,0.2);
+  color: #c3c3c3;
+  background-color: rgba(240,240,240,0.8);
 }
 
 /* html[data-theme=night-theme] #left-page-btn:focus, */
@@ -257,8 +257,8 @@ html[data-theme=night-theme] #left-page-btn:hover
 #right-page-btn:hover
 {
   opacity: 1.0;
-  color: white;
-  background-color: rgba(0,0,0,0.2);
+  color: #c3c3c3;
+  background-color: rgba(240,240,240,0.8);
 }
 /* html[data-theme=night-theme] #right-page-btn:focus, */
 html[data-theme=night-theme] #right-page-btn:hover
